@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace RomanNumbers
 {
-    internal class RomanNumber : ICloneable, IComparable
+    public class RomanNumber : ICloneable, IComparable
     {
 
         private ushort _number;
@@ -20,40 +20,38 @@ namespace RomanNumbers
             else this._number = n;
         }
         //Сложение римских чисел
-        public static RomanNumber Add(RomanNumber? n1, RomanNumber? n2)
+        public static RomanNumber operator +(RomanNumber? n1, RomanNumber? n2)
         {
             int num = n1._number + n2._number;
             if (num <= 0) throw new RomanNumberException("Не удалось сложить  числа!");
             else
             {
-                RomanNumber result = new((ushort)num);
-                return result;
+                return new RomanNumber((ushort)num);
             }
         }
         //Вычитание римских чисел
-        public static RomanNumber Sub(RomanNumber? n1, RomanNumber? n2)
+        public static RomanNumber operator -(RomanNumber? n1, RomanNumber? n2)
         {
             int num = n1._number - n2._number;
             if (num <= 0) throw new RomanNumberException("Результат вычитания меньше либо равен 0!");
             else
             {
-                RomanNumber result = new((ushort)num);
-                return result;
+                return new RomanNumber((ushort)num);
             }
         }
         //Умножение римских чисел
-        public static RomanNumber Mul(RomanNumber? n1, RomanNumber? n2)
+        public static RomanNumber operator *(RomanNumber? n1, RomanNumber? n2)
         {
             int num = n1._number*n2._number;
             if (num <= 0) throw new RomanNumberException("Не удалось умножить 2 числа!");
             else
             {
-                RomanNumber result = new((ushort)num);
-                return result;
+                return new RomanNumber((ushort)num);
             }
         }
+
         //Целочисленное деление римских чисел
-        public static RomanNumber Div(RomanNumber? n1, RomanNumber? n2)
+        public static RomanNumber operator /(RomanNumber? n1, RomanNumber? n2)
         {
             
             if (n2._number == 0) throw new RomanNumberException("Ошибка деления!");
@@ -63,8 +61,7 @@ namespace RomanNumbers
                 if (num == 0) throw new RomanNumberException("Ошибка деления!");
                 else
                 {
-                    RomanNumber result = new((ushort)num);
-                    return result;
+                    return new RomanNumber((ushort)num);
                 }
             }
         }
@@ -90,6 +87,7 @@ namespace RomanNumbers
 
         public object Clone()
         {
+            
             return new RomanNumber(_number);
         }
 
